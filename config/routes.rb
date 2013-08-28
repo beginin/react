@@ -1,4 +1,8 @@
 React::Application.routes.draw do
+  resources :reactions
+
+  resources :stimuls
+
   resources :cities
 
   resources :specialties

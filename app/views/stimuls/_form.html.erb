@@ -1,0 +1,21 @@
+<%= form_for(@stimul) do |f| %>
+  <% if @stimul.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stimul.errors.count, "error") %> prohibited this stimul from being saved:</h2>
+
+      <ul>
+      <% @stimul.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :stimul %><br>
+    <%= f.text_field :stimul %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
