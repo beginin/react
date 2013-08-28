@@ -1,4 +1,7 @@
 React::Application.routes.draw do
+  get "pages/index"
+  get "pages/directory"
+  get "pages/help"
   resources :stimulreactions
 
   resources :worksheets

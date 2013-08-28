@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130828082958) do
+ActiveRecord::Schema.define(version: 20130828084153) do
 
   create_table "cities", force: true do |t|
     t.string   "city"
@@ -25,8 +25,39 @@ ActiveRecord::Schema.define(version: 20130828082958) do
     t.datetime "updated_at"
   end
 
+  create_table "reactions", force: true do |t|
+    t.string   "reaction"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "specialties", force: true do |t|
     t.string   "specialty"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stimulreactions", force: true do |t|
+    t.integer  "worksheet_id"
+    t.integer  "reaction_id"
+    t.integer  "stimul_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stimuls", force: true do |t|
+    t.string   "stimul"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "worksheets", force: true do |t|
+    t.boolean  "sex"
+    t.integer  "age"
+    t.integer  "language_id"
+    t.integer  "specialty_id"
+    t.date     "dateinput"
+    t.integer  "city_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
