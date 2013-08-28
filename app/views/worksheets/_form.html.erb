@@ -1,0 +1,41 @@
+<%= form_for(@worksheet) do |f| %>
+  <% if @worksheet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@worksheet.errors.count, "error") %> prohibited this worksheet from being saved:</h2>
+
+      <ul>
+      <% @worksheet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sex %><br>
+    <%= f.check_box :sex %>
+  </div>
+  <div class="field">
+    <%= f.label :age %><br>
+    <%= f.number_field :age %>
+  </div>
+  <div class="field">
+    <%= f.label :language_id %><br>
+    <%= f.number_field :language_id %>
+  </div>
+  <div class="field">
+    <%= f.label :specialty_id %><br>
+    <%= f.number_field :specialty_id %>
+  </div>
+  <div class="field">
+    <%= f.label :dateinput %><br>
+    <%= f.date_select :dateinput %>
+  </div>
+  <div class="field">
+    <%= f.label :city_id %><br>
+    <%= f.number_field :city_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,37 @@
+<h1>Listing worksheets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Language</th>
+      <th>Specialty</th>
+      <th>Dateinput</th>
+      <th>City</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @worksheets.each do |worksheet| %>
+      <tr>
+        <td><%= worksheet.sex %></td>
+        <td><%= worksheet.age %></td>
+        <td><%= worksheet.language_id %></td>
+        <td><%= worksheet.specialty_id %></td>
+        <td><%= worksheet.dateinput %></td>
+        <td><%= worksheet.city_id %></td>
+        <td><%= link_to 'Show', worksheet %></td>
+        <td><%= link_to 'Edit', edit_worksheet_path(worksheet) %></td>
+        <td><%= link_to 'Destroy', worksheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Worksheet', new_worksheet_path %>
