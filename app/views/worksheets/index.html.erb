@@ -1,14 +1,14 @@
-<h1>Listing worksheets</h1>
+<h1>Анкеты</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Sex</th>
-      <th>Age</th>
-      <th>Language</th>
-      <th>Specialty</th>
-      <th>Dateinput</th>
-      <th>City</th>
+      <th>Пол</th>
+      <th>Возраст</th>
+      <th>Язык</th>
+      <th>Специальность</th>
+      <th>Дата</th>
+      <th>Город</th>
       <th></th>
       <th></th>
       <th></th>
@@ -26,7 +26,7 @@
         <td><%= worksheet.city_id %></td>
         <td><%= link_to 'Show', worksheet %></td>
         <td><%= link_to 'Edit', edit_worksheet_path(worksheet) %></td>
-        <td><%= link_to 'Destroy', worksheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', worksheet, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Worksheet', new_worksheet_path %>
+<%= link_to 'Создать Анкету', new_worksheet_path %>
