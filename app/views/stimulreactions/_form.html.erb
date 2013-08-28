@@ -1,0 +1,29 @@
+<%= form_for(@stimulreaction) do |f| %>
+  <% if @stimulreaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stimulreaction.errors.count, "error") %> prohibited this stimulreaction from being saved:</h2>
+
+      <ul>
+      <% @stimulreaction.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :worksheet_id %><br>
+    <%= f.number_field :worksheet_id %>
+  </div>
+  <div class="field">
+    <%= f.label :reaction_id %><br>
+    <%= f.number_field :reaction_id %>
+  </div>
+  <div class="field">
+    <%= f.label :stimul_id %><br>
+    <%= f.number_field :stimul_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

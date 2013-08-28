@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Worksheet:</strong>
+  <%= @stimulreaction.worksheet_id %>
+</p>
+
+<p>
+  <strong>Reaction:</strong>
+  <%= @stimulreaction.reaction_id %>
+</p>
+
+<p>
+  <strong>Stimul:</strong>
+  <%= @stimulreaction.stimul_id %>
+</p>
+
+<%= link_to 'Edit', edit_stimulreaction_path(@stimulreaction) %> |
+<%= link_to 'Back', stimulreactions_path %>

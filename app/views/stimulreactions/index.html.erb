@@ -1,0 +1,31 @@
+<h1>Listing stimulreactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Worksheet</th>
+      <th>Reaction</th>
+      <th>Stimul</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stimulreactions.each do |stimulreaction| %>
+      <tr>
+        <td><%= stimulreaction.worksheet_id %></td>
+        <td><%= stimulreaction.reaction_id %></td>
+        <td><%= stimulreaction.stimul_id %></td>
+        <td><%= link_to 'Show', stimulreaction %></td>
+        <td><%= link_to 'Edit', edit_stimulreaction_path(stimulreaction) %></td>
+        <td><%= link_to 'Destroy', stimulreaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stimulreaction', new_stimulreaction_path %>

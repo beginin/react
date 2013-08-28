@@ -1,4 +1,6 @@
 React::Application.routes.draw do
+  resources :stimulreactions
+
   resources :worksheets
 
   resources :reactions
