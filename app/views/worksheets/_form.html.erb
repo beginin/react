@@ -21,11 +21,13 @@
   </div>
   <div class="field">
     <%= f.label :language_id %><br>
-    <%= f.number_field :language_id %>
+    <%= f.text_field :language_name, data: {autocompete_source:
+Language.order(:language).map(&:language )} %>
   </div>
   <div class="field">
     <%= f.label :specialty_id %><br>
-    <%= f.number_field :specialty_id %>
+    <%= f.text_field :specialty_name, data: {autocompete_source:
+Specialty.order(:specialty).map(&:specialty)} %>
   </div>
   <div class="field">
     <%= f.label :dateinput %><br>
@@ -33,7 +35,8 @@
   </div>
   <div class="field">
     <%= f.label :city_id %><br>
-    <%= f.number_field :city_id %>
+    <%= f.text_field :city_name, data: {autocompete_source:
+City.order(:city).map(&:city)} %>
   </div>
   <div class="actions">
     <%= f.submit %>

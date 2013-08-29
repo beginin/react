@@ -69,6 +69,6 @@ class WorksheetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def worksheet_params
-      params.require(:worksheet).permit(:sex, :age, :language_id, :specialty_id, :dateinput, :city_id)
+      params.require(:worksheet).permit(:sex, :age, :language_name, :specialty_name, :dateinput, :city_name, :language_id, :specialty_id, :dateinput, :city_id )
     end
 end
