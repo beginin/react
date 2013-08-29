@@ -38,6 +38,17 @@ Specialty.order(:specialty).map(&:specialty)} %>
     <%= f.text_field :city_name, data: {autocompete_source:
 City.order(:city).map(&:city)} %>
   </div>
+  <div cladd="stimulreaction">
+  <%= f.fields_for :stimulteactions do |builder| %>
+    <fieldset>
+    <%= builder.label :stimul_id, "Стимул"  %> 
+    <%= builder.text_field :stimul_id %>
+    <%= builder.label :reaction_id, "Реакция"  %> 
+    <%= builder.text_field :reaction_id %>
+    
+    </fielset>
+  <% end %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
