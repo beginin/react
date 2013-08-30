@@ -7,6 +7,12 @@ class ReactionsController < ApplicationController
     @reactions = Reaction.all
   end
 
+  def search
+    @reactions = Reaction.order(:reaction).where("reaction like ?", '%' + search_params['term'] + '%' )
+    render json: @reactions.map(&:reaction)
+  end
+
+
   # GET /reactions/1
   # GET /reactions/1.json
   def show
@@ -71,4 +77,9 @@ class ReactionsController < ApplicationController
     def reaction_params
       params.require(:reaction).permit(:reaction)
     end
+    def search_params
+      params.permit(:term)
+    end
+
+
 end

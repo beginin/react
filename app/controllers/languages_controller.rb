@@ -7,6 +7,11 @@ class LanguagesController < ApplicationController
     @languages = Language.all
   end
 
+  def search
+    @language = Language.order(:language).where("language like ?", '%' + search_params['term'] + '%' )
+    render json: @language.map(&:language)
+  end
+
   # GET /languages/1
   # GET /languages/1.json
   def show
@@ -70,5 +75,9 @@ class LanguagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def language_params
       params.require(:language).permit(:language)
+    end
+
+    def search_params
+      params.permit(:term)
     end
 end

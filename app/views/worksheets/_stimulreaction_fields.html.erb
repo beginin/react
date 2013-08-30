@@ -1,8 +1,9 @@
 <fieldset>
 <%= f.label :stimul_name, "Стимул"  %>.
-<%= f.text_field :stimul_name %>
+<%= f.text_field :stimul_name, data: {autocompete_source: search_stimuls_path} %>
+<%= f.collection_select(:stimul_id, Stimul.all, :id, :stimul ) %>
 <%= f.label :reaction_name, "Реакция"  %>.
-<%= f.text_field :reaction_name %>
+<%= f.text_field :reaction_name,  data: {autocompete_source: search_reactions_path} %>
 <%= f.hidden_field :_destroy %>
 <%= link_to "Удалить",'#', class: "remove_fields" %>
 </fieldset>

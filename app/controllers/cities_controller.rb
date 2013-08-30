@@ -7,6 +7,11 @@ class CitiesController < ApplicationController
     @cities = City.all
   end
 
+  def search
+    @city = City.order(:city).where("city like ?", '%' + search_params['term'] + '%' )
+    render json: @city.map(&:city)
+  end
+
   # GET /cities/1
   # GET /cities/1.json
   def show
@@ -70,5 +75,9 @@ class CitiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def city_params
       params.require(:city).permit(:city)
+    end
+
+    def search_params
+      params.permit(:term)
     end
 end

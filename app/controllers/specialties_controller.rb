@@ -7,6 +7,12 @@ class SpecialtiesController < ApplicationController
     @specialties = Specialty.all
   end
 
+  def search
+    @specialties = Specialty.order(:specialty).where("specialty like ?", '%' + search_params['term'] + '%' )
+    render json: @specialties.map(&:specialty)
+  end
+
+
   # GET /specialties/1
   # GET /specialties/1.json
   def show
@@ -70,5 +76,9 @@ class SpecialtiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def specialty_params
       params.require(:specialty).permit(:specialty)
+    end
+
+    def search_params
+      params.permit(:term)
     end
 end

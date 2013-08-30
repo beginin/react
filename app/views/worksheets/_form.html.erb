@@ -21,13 +21,11 @@
   </div>
   <div class="field">
     <%= f.label :language_id %><br>
-    <%= f.text_field :language_name, data: {autocompete_source:
-Language.order(:language).map(&:language )} %>
+    <%= f.text_field :language_name, data: {autocompete_source: search_languages_path} %>
   </div>
   <div class="field">
     <%= f.label :specialty_id %><br>
-    <%= f.text_field :specialty_name, data: {autocompete_source:
-Specialty.order(:specialty).map(&:specialty)} %>
+    <%= f.text_field :specialty_name, data: {autocompete_source: search_specialties_path} %>
   </div>
   <div class="field">
     <%= f.label :dateinput %><br>
@@ -35,8 +33,7 @@ Specialty.order(:specialty).map(&:specialty)} %>
   </div>
   <div class="field">
     <%= f.label :city_id %><br>
-    <%= f.text_field :city_name, data: {autocompete_source:
-City.order(:city).map(&:city)} %>
+    <%= f.text_field :city_name, data: {autocompete_source: search_cities_path} %>
   </div>
   <div cladd="stimulreaction">
   <%= f.fields_for :stimulreaction do |builder| %>

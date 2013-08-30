@@ -6,15 +6,26 @@ React::Application.routes.draw do
 
   resources :worksheets
 
-  resources :reactions
+  resources :reactions do
+    get 'search' => 'reactions#search', :on => :collection
+  end
 
-  resources :stimuls
+  resources :stimuls do
+    get 'search' => 'stimuls#search', :on => :collection
+  end
 
-  resources :cities
+  resources :cities do
+    get 'search' => 'cities#search', :on => :collection
+  end
 
-  resources :specialties
+  resources :specialties do
+    get 'search' => 'specialties#search', :on => :collection
+  end
 
-  resources :languages
+  resources :languages do
+    get 'search' => 'languages#search', :on => :collection
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

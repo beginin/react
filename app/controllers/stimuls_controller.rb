@@ -7,6 +7,11 @@ class StimulsController < ApplicationController
     @stimuls = Stimul.all
   end
 
+  def search
+    @stimuls = Stimul.order(:stimul).where("stimul like ?", '%' + search_params['term'] + '%' )
+    render json: @stimuls.map(&:stimul)
+  end
+
   # GET /stimuls/1
   # GET /stimuls/1.json
   def show
@@ -70,5 +75,8 @@ class StimulsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def stimul_params
       params.require(:stimul).permit(:stimul)
+    end
+    def search_params
+      params.permit(:term)
     end
 end

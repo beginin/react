@@ -15,6 +15,7 @@ class WorksheetsController < ApplicationController
   # GET /worksheets/new
   def new
     @worksheet = Worksheet.new
+    100.times {@worksheet.stimulreaction.build}
   end
 
   # GET /worksheets/1/edit
