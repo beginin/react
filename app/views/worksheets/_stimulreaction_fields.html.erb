@@ -1,0 +1,8 @@
+<fieldset>
+<%= f.label :stimul_name, "Стимул"  %>.
+<%= f.text_field :stimul_name %>
+<%= f.label :reaction_name, "Реакция"  %>.
+<%= f.text_field :reaction_name %>
+<%= f.hidden_field :_destroy %>
+<%= link_to "Удалить",'#', class: "remove_fields" %>
+</fieldset>

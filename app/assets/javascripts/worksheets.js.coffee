@@ -6,10 +6,19 @@ jQuery ->
   $('#worksheet_language_name').autocomplete
     source: $('#worksheet_language_name').data('autocompete-source')
 
-jQuery ->
   $('#worksheet_specialty_name').autocomplete
     source: $('#worksheet_specialty_name').data('autocompete-source')
 
-jQuery ->
   $('#worksheet_city_name').autocomplete
     source: $('#worksheet_city_name').data('autocompete-source')
+
+  $('form').on 'click', '.remove_fields', (event) ->
+    $(this).prev('input[type=hidden]').val('1')
+    $(this).closest('fieldset').hide()
+    event.preventDefault()
+
+  $('form').on 'click', '.add_fields', (event) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).before($(this).data('fields').replace(regexp, time))
+    event.preventDefault()

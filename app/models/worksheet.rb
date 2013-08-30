@@ -1,6 +1,6 @@
 class Worksheet < ActiveRecord::Base
   has_many :stimulreaction
-  accepts_nested_attributes_for :stimulreaction
+  accepts_nested_attributes_for :stimulreaction, allow_destroy: true
   belongs_to :city
   belongs_to :specialty
   belongs_to :language

@@ -39,15 +39,10 @@ Specialty.order(:specialty).map(&:specialty)} %>
 City.order(:city).map(&:city)} %>
   </div>
   <div cladd="stimulreaction">
-  <%= f.fields_for :stimulteactions do |builder| %>
-    <fieldset>
-    <%= builder.label :stimul_id, "Стимул"  %> 
-    <%= builder.text_field :stimul_id %>
-    <%= builder.label :reaction_id, "Реакция"  %> 
-    <%= builder.text_field :reaction_id %>
-    
-    </fielset>
+  <%= f.fields_for :stimulreaction do |builder| %>
+    <%= render 'stimulreaction_fields', f: builder %>    
   <% end %>
+  <%= link_to_add_fields "Добавить", f, :stimulreaction %>
   </div>
   <div class="actions">
     <%= f.submit %>
