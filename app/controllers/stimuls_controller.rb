@@ -66,6 +66,19 @@ class StimulsController < ApplicationController
     end
   end
 
+  def upload
+    
+  end
+
+  def uploadcsv
+     Stimul.uploadcsv(upload_params)
+     respond_to do |format|
+      format.html { redirect_to stimuls_url }
+      format.json { head :no_content }
+     end
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stimul
@@ -76,6 +89,11 @@ class StimulsController < ApplicationController
     def stimul_params
       params.require(:stimul).permit(:stimul)
     end
+
+    def upload_params
+      params.require(:upload).permit!
+    end
+
     def search_params
       params.permit(:term)
     end
