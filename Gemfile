@@ -50,5 +50,5 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'russian'
-gem 'charlock_holmes'
+#gem 'charlock_holmes'
 gem 'fastercsv'
