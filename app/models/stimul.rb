@@ -3,10 +3,11 @@ class Stimul < ActiveRecord::Base
 
   def self.uploadcsv(upload)
     require 'csv'
-    
+
     content = upload['csv'].read
-    detection = CharlockHolmes::EncodingDetector.detect(content)
-    utf8_encoded_content = CharlockHolmes::Converter.convert content, detection[:encoding], 'UTF-8'
+    #detection = CharlockHolmes::EncodingDetector.detect(content)
+    #utf8_encoded_content = CharlockHolmes::Converter.convert content, detection[:encoding], 'UTF-8'
+    utf8_encoded_content = content
     #logger.debug "Привет #{utf8_encoded_content}"
     csvarray = CSV.parse(utf8_encoded_content, :col_sep => ';')
 
