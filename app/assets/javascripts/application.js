@@ -11,7 +11,12 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.ui.all
+//= require jquery.ui.core
+//= require jquery.ui.widget 
+//= require jquery.ui.menu 
+//= require jquery.ui.position 
+//= require jquery.ui.autocomplete
+//= require jquery.ui.button
 //= require jquery_ujs
 //= require_tree .
 
