@@ -20,6 +20,7 @@ class Worksheet < ActiveRecord::Base
     specialty.try(:specialty)
   end
 
+
   def specialty_name=(specialty)
     self.specialty = Specialty.find_or_create_by(specialty: specialty) if specialty.present?
   end

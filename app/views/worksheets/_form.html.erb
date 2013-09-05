@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :number %><br>
+    <%= f.text_field :number %>
+  </div>
+
+  <div class="field">
     <%= f.label :sex %><br>
     <%= f.check_box :sex %>
   </div>
@@ -36,8 +41,13 @@
     <%= f.text_field :city_name, data: {autocompete_source: search_cities_path} %>
   </div>
   <div cladd="stimulreaction">
+    <% x=0%>
   <%= f.fields_for :stimulreaction do |builder| %>
-    <%= render 'stimulreaction_fields', f: builder %>    
+  <% x += 1 %>
+  <fieldset>
+    <%= x %>
+    <%= render 'stimulreaction_fields', f: builder %> 
+  </fieldset>   
   <% end %>
   <%= link_to_add_fields "Добавить", f, :stimulreaction %>
   </div>

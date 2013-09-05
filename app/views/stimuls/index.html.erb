@@ -1,9 +1,10 @@
-<h1>Listing stimuls</h1>
+<h1>Стимулы</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Stimul</th>
+      <th>Номер</th>
+      <th>Стимул</th>
       <th></th>
       <th></th>
       <th></th>
@@ -15,10 +16,11 @@
   <tbody>
     <% @stimuls.each do |stimul| %>
       <tr>
+        <td><%= stimul.id %></td>
         <td><%= stimul.stimul %></td>
-        <td><%= link_to 'Show', stimul %></td>
-        <td><%= link_to 'Edit', edit_stimul_path(stimul) %></td>
-        <td><%= link_to 'Destroy', stimul, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Показать', stimul %></td>
+        <td><%= link_to 'Редактировать', edit_stimul_path(stimul) %></td>
+        <td><%= link_to 'Удалить', stimul, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

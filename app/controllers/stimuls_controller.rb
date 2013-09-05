@@ -8,8 +8,9 @@ class StimulsController < ApplicationController
   end
 
   def search
-    @stimuls = Stimul.order(:stimul).where("stimul like ?", '%' + search_params['term'] + '%' )
-    render json: @stimuls.map(&:stimul)
+    d= Integer(search_params['term']) rescue nil
+    @stimuls = Stimul.order(:stimul).where("cast(id as text) like ? or stimul like ? ", '%' + search_params['term'] + '%', '%' + search_params['term'] + '%' )
+    render json: @stimuls.map(&:stimul_withid)
   end
 
   # GET /stimuls/1
@@ -97,4 +98,5 @@ class StimulsController < ApplicationController
     def search_params
       params.permit(:term)
     end
+
 end

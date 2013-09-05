@@ -1,6 +1,11 @@
 class Stimul < ActiveRecord::Base
   has_many :stimulreaction
 
+  def stimul_withid
+    self.id.to_s + " - " + self.stimul.to_s
+    
+  end
+
   def self.uploadcsv(upload)
     require 'csv'
 
