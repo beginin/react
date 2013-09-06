@@ -72,7 +72,7 @@ class Worksheet < ActiveRecord::Base
     #csvarray = CSV.parse(utf8_encoded_content, :col_sep => ';')
     work = Worksheet.create(:number =>name.scan(/\d+/).last, :sex_name => sheet1.row(1)[1],:age => sheet1.row(1)[2], :language_name =>  sheet1.row(1)[3], 
       :specialty_name => sheet1.row(1)[4], :dateinput => sheet1.row(1)[5], :city_name => sheet1.row(1)[6])
-    for i in 1..101
+    for i in 1..100
       work.stimulreaction.create(:stimul => Stimul.find(sheet2.row(i)[0].to_i),:reaction_name =>sheet2.row(i)[1])
     end
     File.delete(path)
