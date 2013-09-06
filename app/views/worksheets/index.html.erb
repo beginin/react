@@ -1,4 +1,5 @@
 <h1>Анкеты</h1>
+<%= link_to 'Загрузить', upload_worksheets_path %>
 
 <table>
   <thead>
@@ -20,7 +21,7 @@
     <% @worksheets.each do |worksheet| %>
       <tr>
         <td><%= worksheet.number %></td>
-        <td><%= worksheet.sex %></td>
+        <td><%= worksheet.sex_name %></td>
         <td><%= worksheet.age %></td>
         <td><%= worksheet.language_name %></td>
         <td><%= worksheet.specialty_name %></td>

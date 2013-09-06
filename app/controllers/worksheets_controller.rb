@@ -62,6 +62,20 @@ class WorksheetsController < ApplicationController
     end
   end
 
+
+  def upload
+    
+  end
+
+  def uploadxls
+     Worksheet.uploadxls(upload_params)
+     respond_to do |format|
+      format.html { redirect_to worksheets_url }
+      format.json { head :no_content }
+     end
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_worksheet
@@ -75,5 +89,9 @@ class WorksheetsController < ApplicationController
       params.require(:worksheet).permit(:sex, :age, :language_name, :specialty_name, :dateinput,
 	 :city_name, :language_id, :specialty_id, :dateinput, :city_id , stimulreaction_attributes:  [:id,:stimul_name , :stimul_id, :reaction_name, :_destroy])
 
+    end
+
+    def upload_params
+      params.require(:upload).permit!
     end
 end

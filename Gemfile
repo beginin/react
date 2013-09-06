@@ -52,3 +52,4 @@ end
 gem 'russian'
 #gem 'charlock_holmes'
 gem 'fastercsv'
+gem 'spreadsheet'

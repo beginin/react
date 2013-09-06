@@ -4,7 +4,10 @@ React::Application.routes.draw do
   get "pages/help"
   resources :stimulreactions
 
-  resources :worksheets
+  resources :worksheets do
+    get 'upload' => 'worksheets#upload', :on => :collection
+    post 'upload' => 'worksheets#uploadxls', :on => :collection
+  end
 
   resources :reactions do
     get 'search' => 'reactions#search', :on => :collection
