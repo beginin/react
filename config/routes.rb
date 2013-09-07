@@ -2,6 +2,7 @@ React::Application.routes.draw do
   get "pages/index"
   get "pages/directory"
   get "pages/help"
+  match "statistic" => 'pages#statistic', :via => [:get, :post] 
   resources :stimulreactions
 
   resources :worksheets do

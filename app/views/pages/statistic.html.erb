@@ -1,0 +1,67 @@
+
+<%= form_tag '', :method => :post do %>
+  <div class="field">
+  	<%= label_tag :query, "Запрос" %>
+    <%= text_field_tag :query, params[:query] %>
+  </div>
+  <div class="field">
+    <%= radio_button_tag(:stimulreaction, "stimul", params[:stimulreaction] == "stimul") %>
+    <%= label_tag(:stimul, "Стимул") %>
+    <%= radio_button_tag(:stimulreaction, "reaction", params[:stimulreaction] == "reaction") %>
+    <%= label_tag(:reaction, "Реакция") %>
+  </div>
+  <div class="field">
+  	<%= label_tag :age_start, "Возраст от" %>
+  	<%= select_tag(:age_start, options_for_select((10..100).to_a, params[:age_start])) %>
+  	<%= label_tag :age_end ,"до" %>
+  	<%= select_tag(:age_end, options_for_select((10..100).to_a, params[:age_end])) %>
+  </div>
+  <div class="field">
+  	<%= label_tag :specialty, "Профессия" %>
+  	<%= select_tag(:specialty, 
+  	options_for_select([["Все",nil]] + Specialty.all.collect { |u| [u.specialty, u.id] }, params[:specialty])) %>
+  </div>
+  <div class="field">
+  	<%= select_tag(:city_id, options_for_select([['Lisbon', 1], ['Madrid', 2]])) %>
+  </div>
+    <div class="field">
+    <%= radio_button_tag(:sex, "all", params[:sex] == "all") %>
+    <%= label_tag(:all, "Все") %>
+    <%= radio_button_tag(:sex, "man", params[:sex] == "man") %>
+    <%= label_tag(:man, "Мужчины") %>
+    <%= radio_button_tag(:sex, "woman", params[:sex] == "woman") %>
+    <%= label_tag(:woman, "Женщины") %>
+    <%= radio_button_tag(:sex, "diff", params[:sex] == "diff") %>
+    <%= label_tag(:diff, "Сравнить") %>
+  </div>
+  <div class="field">
+  	<%= label_tag :sort, "Сортировка" %>
+    <%= radio_button_tag(:sort, "freq", params[:sort] == "freq") %>
+    <%= label_tag(:freq, "По частоте") %>
+    <%= radio_button_tag(:sort, "abc", params[:sort] == "abc") %>
+    <%= label_tag(:abc, "По алфовиту") %>
+  </div>
+  <div class="field">
+  	<%= check_box_tag(:normalization,  true , params[:normalization].present?) %>
+	<%= label_tag(:normalization, "Включить нормализацию по частоте?") %>
+  </div>
+
+
+  <%= submit_tag 'Поиск' %>
+<% end %>
+
+<% if @stimul.present? %>
+  <div id="stimul">
+  	<h3>Статистика по запросу:</h3>
+всего реакций на стимул: 
+	<%= @stimul.stimulreaction.count %>
+	<br>
+  	<%= @stimul.stimul %>
+  </div>
+<% end %>
+
+<% if @reaction.present? %>
+  <div id="reaction">
+  	<%= @reaction.reaction %>
+  </div>
+<% end %>
