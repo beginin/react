@@ -2,7 +2,7 @@
 
 <p>
   <strong>Пол:</strong>
-  <%= @worksheet.sex %>
+  <%= @worksheet.sex_name %>
 </p>
 
 <p>
@@ -12,12 +12,12 @@
 
 <p>
   <strong>Язык:</strong>
-  <%= @worksheet.language_id %>
+  <%= @worksheet.language_name %>
 </p>
 
 <p>
   <strong>Специальность:</strong>
-  <%= @worksheet.specialty_id %>
+  <%= @worksheet.specialty_name %>
 </p>
 
 <p>
@@ -27,8 +27,30 @@
 
 <p>
   <strong>Город:</strong>
-  <%= @worksheet.city_id %>
+  <%= @worksheet.city_name %>
 </p>
+
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Стимул</th>
+      <th>Реакция</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% i = 0 %>
+    <% @worksheet.stimulreaction.each do |f| %>
+      <tr>
+        <td><%= i = i + 1 %></td>
+        <td><%= f.stimul.stimul_withid %></td>
+        <td><%= f.reaction.reaction %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 <%= link_to 'Редактировать', edit_worksheet_path(@worksheet) %> |
 <%= link_to 'Назад', worksheets_path %>

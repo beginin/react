@@ -14,9 +14,9 @@
     <% @specialties.each do |specialty| %>
       <tr>
         <td><%= specialty.specialty %></td>
-        <td><%= link_to 'Show', specialty %></td>
-        <td><%= link_to 'Edit', edit_specialty_path(specialty) %></td>
-        <td><%= link_to 'Destroy', specialty, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Показать', specialty %></td>
+        <td><%= link_to 'Редактировать', edit_specialty_path(specialty) %></td>
+        <td><%= link_to 'Удалить', specialty, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Specialty', new_specialty_path %>
+<%= link_to 'Новая специальность', new_specialty_path %>

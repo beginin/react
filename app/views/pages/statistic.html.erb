@@ -22,9 +22,6 @@
   	options_for_select([["Все",nil]] + Specialty.all.collect { |u| [u.specialty, u.id] }, params[:specialty])) %>
   </div>
   <div class="field">
-  	<%= select_tag(:city_id, options_for_select([['Lisbon', 1], ['Madrid', 2]])) %>
-  </div>
-    <div class="field">
     <%= radio_button_tag(:sex, "all", params[:sex] == "all") %>
     <%= label_tag(:all, "Все") %>
     <%= radio_button_tag(:sex, "man", params[:sex] == "man") %>

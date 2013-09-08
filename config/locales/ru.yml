@@ -22,4 +22,8 @@
 ru:
   hello: "Привет мир"
   age: "Возравст"
-
+ru:
+  helpers:
+    submit:
+      create: "Создать"
+      update: "Изменить"

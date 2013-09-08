@@ -12,32 +12,32 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :number %><br>
+    <%= f.label :number, "Номер" %><br>
     <%= f.text_field :number %>
   </div>
 
   <div class="field">
-    <%= f.label :sex %><br>
+    <%= f.label :sex, "Пол" %><br>
     <%= f.check_box :sex %>
   </div>
   <div class="field">
-    <%= f.label :age %><br>
+    <%= f.label :age, "Возраст" %><br>
     <%= f.number_field :age %>
   </div>
   <div class="field">
-    <%= f.label :language_id %><br>
+    <%= f.label :language_name, "Язык" %><br>
     <%= f.text_field :language_name, data: {autocompete_source: search_languages_path} %>
   </div>
   <div class="field">
-    <%= f.label :specialty_id %><br>
+    <%= f.label :specialty_name, "Специальность" %><br>
     <%= f.text_field :specialty_name, data: {autocompete_source: search_specialties_path} %>
   </div>
   <div class="field">
-    <%= f.label :dateinput %><br>
+    <%= f.label :dateinput, "Дата заполнения" %><br>
     <%= f.date_select :dateinput %>
   </div>
   <div class="field">
-    <%= f.label :city_id %><br>
+    <%= f.label :city_name, "Город" %><br>
     <%= f.text_field :city_name, data: {autocompete_source: search_cities_path} %>
   </div>
   <div cladd="stimulreaction">

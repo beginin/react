@@ -1,4 +1,4 @@
-<h1>Listing reactions</h1>
+<h1>Реакции</h1>
 
 <table>
   <thead>
@@ -14,9 +14,9 @@
     <% @reactions.each do |reaction| %>
       <tr>
         <td><%= reaction.reaction %></td>
-        <td><%= link_to 'Show', reaction %></td>
-        <td><%= link_to 'Edit', edit_reaction_path(reaction) %></td>
-        <td><%= link_to 'Destroy', reaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Показать', reaction %></td>
+        <td><%= link_to 'Редактировать', edit_reaction_path(reaction) %></td>
+        <td><%= link_to 'Удалить', reaction, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Reaction', new_reaction_path %>
+<%= link_to 'Новая реакция', new_reaction_path %>

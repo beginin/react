@@ -20,7 +20,7 @@
         <td><%= stimul.stimul %></td>
         <td><%= link_to 'Показать', stimul %></td>
         <td><%= link_to 'Редактировать', edit_stimul_path(stimul) %></td>
-        <td><%= link_to 'Удалить', stimul, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Удалить', stimul, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Stimul', new_stimul_path %>
+<%= link_to 'Новый стимул', new_stimul_path %>
