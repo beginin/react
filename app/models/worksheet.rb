@@ -41,7 +41,7 @@ class Worksheet < ActiveRecord::Base
 
 
   def specialty_name=(specialty)
-    self.specialty = Specialty.find_or_create_by(specialty: specialty.downcase) if specialty.present?
+    self.specialty = Specialty.find_or_create_by(specialty: specialty.to_s) if specialty.present?
   end
 
   def language_name
@@ -74,7 +74,7 @@ class Worksheet < ActiveRecord::Base
       work = Worksheet.create(:number =>name.scan(/\d+/).last, :sex_name => sheet1.row(1)[1],:age => sheet1.row(1)[2], :language_name =>  sheet1.row(1)[3], 
         :specialty_name => sheet1.row(1)[4], :dateinput => sheet1.row(1)[5], :city_name => sheet1.row(1)[6])
       for i in 1..100
-        work.stimulreaction.create(:stimul => Stimul.find(sheet2.row(i)[0].to_i),:reaction_name =>sheet2.row(i)[1])
+        work.stimulreaction.create(:stimul => Stimul.find(sheet2.row(i)[0].to_i),:reaction_name =>sheet2.row(i)[1].to_s)
       end
       File.delete(path)
     end
