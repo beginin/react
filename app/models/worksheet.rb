@@ -6,8 +6,8 @@ class Worksheet < ActiveRecord::Base
   belongs_to :specialty
   belongs_to :language
   #attr_accessor :sex, :age, :language, :specialty, :city
-  #validates :sex, :age, :language, :specialty, :city, presence: 	true
-  #validates :age, numericality: { only_integer: true , :greater_than => 0, :less_than_or_equal_to => 100}
+  validates :number, :sex, :age, :language, :specialty, :city, presence: 	true
+  validates :age, numericality: { only_integer: true , :greater_than => 10, :less_than => 100}
 
 
   def sex_name

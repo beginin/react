@@ -27,3 +27,17 @@ ru:
     submit:
       create: "Создать"
       update: "Изменить"
+ru:
+  activerecord:
+    models:
+      worksheet: "Анкета"
+    attributes:
+      worksheet:
+        number: "Номер"
+        sex: "Пол"
+        age: "Возраст"
+        language: "Язык"
+        specialty: "Специальность"
+        city: "Город"
+        dateinput: "Дата заполнения"
+    

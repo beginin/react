@@ -1,8 +1,7 @@
 <%= form_for(@worksheet) do |f| %>
   <% if @worksheet.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@worksheet.errors.count, "error") %> prohibited this worksheet from being saved:</h2>
-
+      <h2>Не все данные верны:</h2>
       <ul>
       <% @worksheet.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -12,32 +11,32 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :number, "Номер" %><br>
+    <%= f.label :number %><br>
     <%= f.text_field :number %>
   </div>
 
   <div class="field">
-    <%= f.label :sex, "Пол" %><br>
+    <%= f.label :sex %><br>
     <%= f.check_box :sex %>
   </div>
   <div class="field">
-    <%= f.label :age, "Возраст" %><br>
+    <%= f.label :age %><br>
     <%= f.number_field :age %>
   </div>
   <div class="field">
-    <%= f.label :language_name, "Язык" %><br>
+    <%= f.label :language_name %><br>
     <%= f.text_field :language_name, data: {autocompete_source: search_languages_path} %>
   </div>
   <div class="field">
-    <%= f.label :specialty_name, "Специальность" %><br>
+    <%= f.label :specialty_name %><br>
     <%= f.text_field :specialty_name, data: {autocompete_source: search_specialties_path} %>
   </div>
   <div class="field">
-    <%= f.label :dateinput, "Дата заполнения" %><br>
+    <%= f.label :dateinput %><br>
     <%= f.date_select :dateinput %>
   </div>
   <div class="field">
-    <%= f.label :city_name, "Город" %><br>
+    <%= f.label :city_name %><br>
     <%= f.text_field :city_name, data: {autocompete_source: search_cities_path} %>
   </div>
   <div cladd="stimulreaction">

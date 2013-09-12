@@ -86,7 +86,7 @@ class WorksheetsController < ApplicationController
     def worksheet_params
 #      params.require(:worksheet).permit(:sex, :age, :language_name, :specialty_name, :dateinput,
 #	 :city_name, :language_id, :specialty_id, :dateinput, :city_id , :stimulreactions => [:id, :stimul_id, :reaction_id])
-      params.require(:worksheet).permit(:sex, :age, :language_name, :specialty_name, :dateinput,
+      params.require(:worksheet).permit(:number, :sex, :age, :language_name, :specialty_name, :dateinput,
 	 :city_name, :language_id, :specialty_id, :dateinput, :city_id , stimulreaction_attributes:  [:id,:stimul_name , :stimul_id, :reaction_name, :_destroy])
 
     end
