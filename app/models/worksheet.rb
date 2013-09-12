@@ -6,7 +6,8 @@ class Worksheet < ActiveRecord::Base
   belongs_to :specialty
   belongs_to :language
   #attr_accessor :sex, :age, :language, :specialty, :city
-  validates :number, :sex, :age, :language, :specialty, :city, presence: 	true
+  validates :number, uniqueness: true
+  validates :number, :age, :language, :specialty, :city, presence: 	true
   validates :age, numericality: { only_integer: true , :greater_than => 10, :less_than => 100}
 
 
@@ -57,6 +58,7 @@ class Worksheet < ActiveRecord::Base
 
     #content = upload['xls'].read
     #logger.debug "Hello #{content}"
+    err = Hash.new
     upload['xls'].each do |xls|
       name = xls.original_filename
       logger.debug "Hello #{name.scan(/\d+/)}"
@@ -71,11 +73,17 @@ class Worksheet < ActiveRecord::Base
       #utf8_encoded_content = content
       #logger.debug "Привет #{utf8_encoded_content}"
       #csvarray = CSV.parse(utf8_encoded_content, :col_sep => ';')
-      work = Worksheet.create(:number =>name.scan(/\d+/).last, :sex_name => sheet1.row(1)[1],:age => sheet1.row(1)[2], :language_name =>  sheet1.row(1)[3], 
+      work = Worksheet.new(:number =>name.scan(/\d+/).last, :sex_name => sheet1.row(1)[1],:age => sheet1.row(1)[2].to_i, :language_name =>  sheet1.row(1)[3], 
         :specialty_name => sheet1.row(1)[4], :dateinput => sheet1.row(1)[5], :city_name => sheet1.row(1)[6])
       for i in 1..100
-        work.stimulreaction.create(:stimul => Stimul.find(sheet2.row(i)[0].to_i),:reaction_name =>sheet2.row(i)[1].to_s)
+        work.stimulreaction.new(:stimul => Stimul.find(sheet2.row(i)[0].to_i),:reaction_name =>sheet2.row(i)[1].to_s)
       end
+      if work.save
+        err[name] = ["Успешно загружена"]
+      else
+        err[name] = work.errors.full_messages 
+      end
+      logger.debug work.errors.full_messages
       File.delete(path)
     end
 
@@ -84,6 +92,8 @@ class Worksheet < ActiveRecord::Base
     #  n = Stimul.where(:stimul => row[0]).first || Stimul.new(:stimul => row[0])
     #  n.save
     #end
+    logger.debug err
+    err
   end
 
 

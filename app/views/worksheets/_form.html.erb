@@ -1,3 +1,4 @@
+# coding: utf-8
 <%= form_for(@worksheet) do |f| %>
   <% if @worksheet.errors.any? %>
     <div id="error_explanation">
@@ -15,9 +16,10 @@
     <%= f.text_field :number %>
   </div>
 
+
   <div class="field">
-    <%= f.label :sex %><br>
-    <%= f.check_box :sex %>
+    <%= f.label :sex, "Пол" %><br>
+    <%= f.select(:sex, options_for_select([["мужской",true],["женский",false]],:sex)) %>
   </div>
   <div class="field">
     <%= f.label :age %><br>

@@ -29,7 +29,7 @@ class WorksheetsController < ApplicationController
 
     respond_to do |format|
       if @worksheet.save
-        format.html { redirect_to @worksheet, notice: 'Worksheet was successfully created.' }
+        format.html { redirect_to @worksheet, notice: 'Анкета успешно создана.' }
         format.json { render action: 'show', status: :created, location: @worksheet }
       else
         format.html { render action: 'new' }
@@ -43,7 +43,7 @@ class WorksheetsController < ApplicationController
   def update
     respond_to do |format|
       if @worksheet.update(worksheet_params)
-        format.html { redirect_to @worksheet, notice: 'Worksheet was successfully updated.' }
+        format.html { redirect_to @worksheet, notice: 'Анкета успешно обновлена.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -68,9 +68,9 @@ class WorksheetsController < ApplicationController
   end
 
   def uploadxls
-     Worksheet.uploadxls(upload_params)
+     log=Worksheet.uploadxls(upload_params)
      respond_to do |format|
-      format.html { redirect_to worksheets_url }
+      format.html { redirect_to worksheets_url, notice: log }
       format.json { head :no_content }
      end
     

@@ -5,7 +5,7 @@
     <%= text_field_tag :query, params[:query] %>
   </div>
   <div class="field">
-    <%= radio_button_tag(:stimulreaction, "stimul", params[:stimulreaction] == "stimul") %>
+    <%= radio_button_tag(:stimulreaction, "stimul", (params[:stimulreaction] ||= "stimul" ) == "stimul") %>
     <%= label_tag(:stimul, "Стимул") %>
     <%= radio_button_tag(:stimulreaction, "reaction", params[:stimulreaction] == "reaction") %>
     <%= label_tag(:reaction, "Реакция") %>
@@ -22,7 +22,7 @@
   	options_for_select([["Все",nil]] + Specialty.all.collect { |u| [u.specialty, u.id] }, params[:specialty])) %>
   </div>
   <div class="field">
-    <%= radio_button_tag(:sex, "all", params[:sex] == "all") %>
+    <%= radio_button_tag(:sex, "all", (params[:sex] ||= "all" ) == "all") %>
     <%= label_tag(:all, "Все") %>
     <%= radio_button_tag(:sex, "man", params[:sex] == "man") %>
     <%= label_tag(:man, "Мужчины") %>
@@ -33,7 +33,7 @@
   </div>
   <div class="field">
   	<%= label_tag :sort, "Сортировка" %>
-    <%= radio_button_tag(:sort, "freq", params[:sort] == "freq") %>
+    <%= radio_button_tag(:sort, "freq", (params[:sort] ||= "freq" ) == "freq") %>
     <%= label_tag(:freq, "По частоте") %>
     <%= radio_button_tag(:sort, "abc", params[:sort] == "abc") %>
     <%= label_tag(:abc, "По алфовиту") %>
