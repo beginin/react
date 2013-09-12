@@ -14,7 +14,7 @@
   	<%= label_tag :age_start, "Возраст от" %>
   	<%= select_tag(:age_start, options_for_select((10..100).to_a, params[:age_start])) %>
   	<%= label_tag :age_end ,"до" %>
-  	<%= select_tag(:age_end, options_for_select((10..100).to_a, params[:age_end])) %>
+  	<%= select_tag(:age_end, options_for_select((10..100).to_a, params[:age_end] ||= 100)) %>
   </div>
   <div class="field">
   	<%= label_tag :specialty, "Профессия" %>
@@ -51,10 +51,28 @@
   <div id="stimul">
   	<h3>Статистика по запросу:</h3>
 всего реакций на стимул: 
-	<%= @stimul.stimulreaction.count %>
+	<%= @stimulreaction.count %>
 	<br>
   	<%= @stimul.stimul %>
   </div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Реакции</th>
+      <th>Число</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stimulreaction_fd.each do |f| %>
+      <tr>
+        <td><%= f.reaction.reaction %></td>
+        <td><%= f.sum %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <% end %>
 
 <% if @reaction.present? %>
