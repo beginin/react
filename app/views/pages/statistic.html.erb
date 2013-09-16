@@ -36,11 +36,11 @@
     <%= radio_button_tag(:sort, "freq", (params[:sort] ||= "freq" ) == "freq") %>
     <%= label_tag(:freq, "По частоте") %>
     <%= radio_button_tag(:sort, "abc", params[:sort] == "abc") %>
-    <%= label_tag(:abc, "По алфовиту") %>
+    <%= label_tag(:abc, "По алфавиту") %>
   </div>
   <div class="field">
   	<%= check_box_tag(:normalization,  true , params[:normalization].present?) %>
-	<%= label_tag(:normalization, "Включить нормализацию по частоте?") %>
+	<%= label_tag(:normalization, "Включить нормализацию по частоте") %>
   </div>
 
 
