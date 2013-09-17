@@ -51,7 +51,7 @@
   <div id="stimul">
   	<h3>Статистика по запросу:</h3>
 всего реакций на стимул: 
-	<%= @stimulreaction.count %>
+	<%= @count %>
 	<br>
   	<%= @stimul.stimul %>
   </div>
@@ -60,7 +60,7 @@
   <thead>
     <tr>
       <th>Реакции</th>
-      <th>Число</th>
+      <th><%=  params[:normalization].present? ? "Частота" : "Число" %></th>
     </tr>
   </thead>
 

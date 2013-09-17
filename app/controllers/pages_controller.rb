@@ -31,9 +31,16 @@ class PagesController < ApplicationController
         if params[:specialty].present?
           stimulreaction_tmp = stimulreaction_tmp.where("specialty_id = ? ", params[:specialty])
         end
+        @count = stimulreaction_tmp.count
 
-        stimulreaction_tmp = stimulreaction_tmp.select("reaction_id, 
-          count(*) as sum").group("reaction_id, reactions.reaction")
+        if params[:normalization].present?
+          tm=@count*0.01
+          stimulreaction_tmp = stimulreaction_tmp.select("reaction_id, 
+            round(count(*)/#{tm}, 2) as sum ").group("reaction_id, reactions.reaction")
+        else
+          stimulreaction_tmp = stimulreaction_tmp.select("reaction_id, 
+            count(*) as sum").group("reaction_id, reactions.reaction")
+        end
 
         if params[:sort] == "freq"
           @stimulreaction_fd = stimulreaction_tmp.order("sum DESC")
