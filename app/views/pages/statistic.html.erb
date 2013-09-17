@@ -50,10 +50,9 @@
 <% if @stimul.present? %>
   <div id="stimul">
   	<h3>Статистика по запросу:</h3>
-всего реакций на стимул: 
-	<%= @count %>
+всего реакций на стимул "<%= @stimul.stimul %>" : <%= @count %>
 	<br>
-  	<%= @stimul.stimul %>
+  	
   </div>
 
 <table>
