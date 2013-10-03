@@ -32,7 +32,7 @@ class Stimul < ActiveRecord::Base
     if sort == "freq"
       sorts =  "full_man.count DESC"
     else
-      sorts =  "full_man.count DESC"
+      sorts =  "full_man.reaction ASC"
     end
 
     sql = "with man as (
@@ -47,12 +47,13 @@ class Stimul < ActiveRecord::Base
       GROUP BY stimulreactions.reaction_id, worksheets.sex 
       ), 
       full_man as(
-      select stimulreactions.reaction_id, count(*) from stimulreactions 
-      join worksheets  on (stimulreactions.worksheet_id = worksheets.id)
+      select stimulreactions.reaction_id, count(*), reactions.reaction  from stimulreactions 
+      LEFT OUTER JOIN worksheets  on (stimulreactions.worksheet_id = worksheets.id)
+      LEFT OUTER JOIN reactions  on (stimulreactions.reaction_id = reactions.id)
       where " + where +" 
-      GROUP BY stimulreactions.reaction_id
+      GROUP BY stimulreactions.reaction_id, reactions.reaction
       )
-      Select full_man.reaction_id, full_man.count,woman.count as woman,man.count as man from full_man
+      Select full_man.reaction_id, full_man.count,woman.count as woman,man.count as man, full_man.reaction  from full_man
       LEFT OUTER JOIN  woman  on(full_man.reaction_id = woman.reaction_id)
       LEFT OUTER JOIN  man on(full_man.reaction_id = man.reaction_id)
       ORDER BY " + sorts

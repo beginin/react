@@ -25,9 +25,9 @@
     <%= radio_button_tag(:sex, "all", (params[:sex] ||= "all" ) == "all") %>
     <%= label_tag(:all, "Все") %>
     <%= radio_button_tag(:sex, "man", params[:sex] == "man") %>
-    <%= label_tag(:man, "Мужчины") %>
+    <%= label_tag(:man, "Женщины") %>
     <%= radio_button_tag(:sex, "woman", params[:sex] == "woman") %>
-    <%= label_tag(:woman, "Женщины") %>
+    <%= label_tag(:woman, "Мужчины") %>
     <%= radio_button_tag(:sex, "diff", params[:sex] == "diff") %>
     <%= label_tag(:diff, "Сравнить") %>
   </div>
@@ -50,10 +50,13 @@
 <% if @stimul.present? and params[:sex] != "diff" %>
   <div id="stimul">
   	<h3>Статистика по запросу:</h3>
-всего реакций на стимул "<%= @stimul.stimul %>" : <%= @count %>
+всего реакций на стимул "<%= @stimul.stimul %>" : <%= @stimulreaction_fd.rows.count %>
 	<br>
   	
   </div>
+
+
+
 
 <table>
   <thead>
@@ -67,7 +70,22 @@
     <% @stimulreaction_fd.rows.each do |f| %>
       <tr>
         <td><%= Reaction.find(f[0]).reaction rescue nil %></td>
-        <td><%= f[1] %></td>
+        <% df=""
+        if params[:sex] == "all"
+          df = f[1]
+          df = (f[1].to_d/@stimulreaction_fd.rows.count*100).round  if (params[:normalization].present? and f[1].present?)
+        elsif params[:sex] == "woman"
+          df = f[2]
+          df = (f[2].to_d/@stimulreaction_fd.rows.count*100).round  if (params[:normalization].present? and f[2].present?)
+        elsif params[:sex] == "man"
+          df = f[3]
+          df = (f[3].to_d/@stimulreaction_fd.rows.count*100).round  if (params[:normalization].present? and f[3].present?)
+        else
+          df = f[1]
+          df = (f[1].to_d/@stimulreaction_fd.rows.count*100).round  if (params[:normalization].present? and f[1].present?)
+        end
+         %>
+        <td><%= df %></td>
       </tr>
     <% end %>
   </tbody>
@@ -85,15 +103,18 @@
  <thead>
     <tr>
       <th>Реакции</th>
-      <th><%=  params[:normalization].present? ? "Частота М" : "Число М" %></th>
-      <th><%=  params[:normalization].present? ? "Частота Ж" : "Число Ж" %></th>
+      <th>Частота</th>
+      <th>Муж</th>
+      <th>Жен</th>
     </tr>
   </thead>
     <tbody>
-    <% @stimulreaction_woman.each do |f| %>
+     <% @stimulreaction_fd.rows.each do |f| %>
       <tr>
-        <td><%= f.reaction.reaction %></td>
-        <td><%= f.sum %></td>
+        <td><%= Reaction.find(f[0]).reaction rescue nil %></td>
+        <td><%= (params[:normalization].present? and f[1].present?)? (f[1].to_d/@stimulreaction_fd.rows.count*100).round : f[1]  %></td>
+        <td><%= (params[:normalization].present? and f[2].present?)? (f[2].to_d/@stimulreaction_fd.rows.count*100).round : f[2]  %></td>
+        <td><%=(params[:normalization].present? and f[3].present?)? (f[3].to_d/@stimulreaction_fd.rows.count*100).round : f[3]  %></td>
       </tr>
     <% end %>
   </tbody>
