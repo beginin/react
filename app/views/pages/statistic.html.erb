@@ -47,7 +47,7 @@
   <%= submit_tag 'Поиск' %>
 <% end %>
 
-<% if @stimul.present? %>
+<% if @stimul.present? and params[:sex] != "diff" %>
   <div id="stimul">
   	<h3>Статистика по запросу:</h3>
 всего реакций на стимул "<%= @stimul.stimul %>" : <%= @count %>
@@ -64,10 +64,10 @@
   </thead>
 
   <tbody>
-    <% @stimulreaction_fd.each do |f| %>
+    <% @stimulreaction_fd.rows.each do |f| %>
       <tr>
-        <td><%= f.reaction.reaction %></td>
-        <td><%= f.sum %></td>
+        <td><%= Reaction.find(f[0]).reaction rescue nil %></td>
+        <td><%= f[1] %></td>
       </tr>
     <% end %>
   </tbody>
@@ -78,4 +78,25 @@
   <div id="reaction">
   	<%= @reaction.reaction %>
   </div>
+<% end %>
+
+<% if @stimul.present? and params[:sex] == "diff" %>
+ <table>
+ <thead>
+    <tr>
+      <th>Реакции</th>
+      <th><%=  params[:normalization].present? ? "Частота М" : "Число М" %></th>
+      <th><%=  params[:normalization].present? ? "Частота Ж" : "Число Ж" %></th>
+    </tr>
+  </thead>
+    <tbody>
+    <% @stimulreaction_woman.each do |f| %>
+      <tr>
+        <td><%= f.reaction.reaction %></td>
+        <td><%= f.sum %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <% end %>

@@ -37,7 +37,10 @@ ru:
         sex: "Пол"
         age: "Возраст"
         language: "Язык"
+        language_name: "Язык"
         specialty: "Специальность"
+        specialty_name: "Специальность"
         city: "Город"
+        city_name: "Город"
         dateinput: "Дата заполнения"
     
