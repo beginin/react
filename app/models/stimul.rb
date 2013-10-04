@@ -1,5 +1,59 @@
 class Stimul < ActiveRecord::Base
   has_many :stimulreaction
+  @@agemin = 10
+  @@agemax = 90
+  @@specialty_id=nil
+  @@sex=nil
+  @@normalization=nil
+  @@sort=nil
+
+  def agemin
+    @@agemin
+  end
+
+  def agemin=(some_hash)
+    @@agemin = some_hash
+  end
+
+  def agemax
+    @@agemax
+  end
+
+  def agemax=(some_hash)
+    @@agemax = some_hash
+  end
+
+  def specialty_id
+    @@agemin
+  end
+
+  def specialty_id=(some_hash)
+    @@specialty_id = some_hash
+  end
+
+  def sex
+    @@sex
+  end
+
+  def sex=(some_hash)
+    @@sex = some_hash
+  end
+
+  def normalization
+    @@normalization
+  end
+
+  def normalization=(some_hash)
+    @@normalization = some_hash
+  end
+
+  def sort
+    @@sort
+  end
+
+  def sort=(some_hash)
+    @@sort = some_hash
+  end
 
   def stimul_withid
     self.id.to_s + " - " + self.stimul.to_s
@@ -23,45 +77,44 @@ class Stimul < ActiveRecord::Base
     end
   end
 
-  def reactions(agemin,agemax,specialty_id=nil,sort="freq")
-    where = "stimul_id = " + self.id.to_s + " and age >= " + agemin.to_s + " and age <= " + agemax.to_s
-    if specialty_id.present?  
-      where = where + " and specialty_id = " + specialty_id.to_s
+  def reaction_all
+    d = self.stimulreaction.joins(:worksheet,:reaction).where("age >= ? AND age <= ?", @@agemin, @@agemax)
+    if @@specialty_id.nil? == false
+      d = d.where("specialty_id = ?", @@specialty_id)
     end
-
-    if sort == "freq"
-      sorts =  "full_man.count DESC"
-    else
-      sorts =  "full_man.reaction ASC"
+    if @@sex == "man"
+      d = d.where("sex = true", @@sex)
     end
-
-    sql = "with man as (
-      select stimulreactions.reaction_id, worksheets.sex  ,count(*) from stimulreactions 
-       join worksheets  on (stimulreactions.worksheet_id = worksheets.id)
-      where " + where +"  and worksheets.sex = true
-      GROUP BY stimulreactions.reaction_id, worksheets.sex ),
-      woman as ( 
-      select stimulreactions.reaction_id, worksheets.sex  ,count(*) from stimulreactions 
-       join worksheets  on (stimulreactions.worksheet_id = worksheets.id)
-      where " + where +" and worksheets.sex = false
-      GROUP BY stimulreactions.reaction_id, worksheets.sex 
-      ), 
-      full_man as(
-      select stimulreactions.reaction_id, count(*), reactions.reaction  from stimulreactions 
-      LEFT OUTER JOIN worksheets  on (stimulreactions.worksheet_id = worksheets.id)
-      LEFT OUTER JOIN reactions  on (stimulreactions.reaction_id = reactions.id)
-      where " + where +" 
-      GROUP BY stimulreactions.reaction_id, reactions.reaction
-      )
-      Select full_man.reaction_id, full_man.count,woman.count as woman,man.count as man, full_man.reaction  from full_man
-      LEFT OUTER JOIN  woman  on(full_man.reaction_id = woman.reaction_id)
-      LEFT OUTER JOIN  man on(full_man.reaction_id = man.reaction_id)
-      ORDER BY " + sorts
-    records_array = ActiveRecord::Base.connection.select_all( sql )
-
-  end
-
-  def reactions_woman()
+    if @@sex == "woman"
+      d = d.where("sex = false", @@sex)
+    end
     
+    d=d.select("reaction_id, reaction, count(*) as count_all").group("reaction_id,reaction")
+    
+    if @@sort == "freq"
+      d = d.order("count_all DESC")
+    else 
+      d = d.order("reaction ASC")
+    end
+    d
   end
+
+  def reaction_count(reaction_id)
+    d = self.stimulreaction.where("reaction_id = ?", reaction_id).joins(:worksheet).where("age >= ? AND age <= ?", @@agemin, @@agemax)
+    if @@specialty_id.nil? == false
+      d = d.where("specialty_id = ?", @@specialty_id)
+    end
+    if @@sex == "man"
+      d = d.where("sex = true", @@sex)
+    end
+    if @@sex == "woman"
+      d = d.where("sex = false", @@sex)
+    end
+    d = d.count
+    if normalization.nil? == false
+      d=(100*d/self.reaction_all.count.count).round rescue nil
+    end
+    d    
+  end
+
 end

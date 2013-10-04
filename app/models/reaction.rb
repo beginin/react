@@ -6,13 +6,11 @@ class Reaction < ActiveRecord::Base
     if specialty_id.present?  
       where = where + " and specialty_id = " + specialty_id.to_s
     end
-
     if sort == "freq"
       sorts =  "full_man.count DESC"
     else
       sorts =  "full_man.stimuls ASC"
     end
-
     sql = "with man as (
       select stimulreactions.stimul_id, worksheets.sex  ,count(*) from stimulreactions 
        join worksheets  on (stimulreactions.worksheet_id = worksheets.id)
@@ -36,6 +34,5 @@ class Reaction < ActiveRecord::Base
       LEFT OUTER JOIN  man on(full_man.reaction_id = man.reaction_id)
       ORDER BY " + sorts
     records_array = ActiveRecord::Base.connection.select_all( sql )
-
   end
 end

@@ -47,49 +47,8 @@
   <%= submit_tag 'Поиск' %>
 <% end %>
 
-<% if @stimul.present? and params[:sex] != "diff" %>
-  <div id="stimul">
-  	<h3>Статистика по запросу:</h3>
-всего реакций на стимул "<%= @stimul.stimul %>" : <%= @stimulreaction_fd.rows.count %>
-	<br>
-  	
-  </div>
-
-
-
-
-<table>
-  <thead>
-    <tr>
-      <th>Реакции</th>
-      <th><%=  params[:normalization].present? ? "Частота" : "Число" %></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @stimulreaction_fd.rows.each do |f| %>
-      <tr>
-        <td><%= Reaction.find(f[0]).reaction rescue nil %></td>
-        <% df=""
-        if params[:sex] == "all"
-          df = f[1]
-          df = (f[1].to_d/@stimulreaction_fd.rows.count*100).round  if (params[:normalization].present? and f[1].present?)
-        elsif params[:sex] == "woman"
-          df = f[2]
-          df = (f[2].to_d/@stimulreaction_fd.rows.count*100).round  if (params[:normalization].present? and f[2].present?)
-        elsif params[:sex] == "man"
-          df = f[3]
-          df = (f[3].to_d/@stimulreaction_fd.rows.count*100).round  if (params[:normalization].present? and f[3].present?)
-        else
-          df = f[1]
-          df = (f[1].to_d/@stimulreaction_fd.rows.count*100).round  if (params[:normalization].present? and f[1].present?)
-        end
-         %>
-        <td><%= df %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if @stimul.present? %>
+ <%= render 'pages/stimul' %>
 <% end %>
 
 <% if @reaction.present? %>
@@ -98,26 +57,3 @@
   </div>
 <% end %>
 
-<% if @stimul.present? and params[:sex] == "diff" %>
- <table>
- <thead>
-    <tr>
-      <th>Реакции</th>
-      <th>Частота</th>
-      <th>Муж</th>
-      <th>Жен</th>
-    </tr>
-  </thead>
-    <tbody>
-     <% @stimulreaction_fd.rows.each do |f| %>
-      <tr>
-        <td><%= Reaction.find(f[0]).reaction rescue nil %></td>
-        <td><%= (params[:normalization].present? and f[1].present?)? (f[1].to_d/@stimulreaction_fd.rows.count*100).round : f[1]  %></td>
-        <td><%= (params[:normalization].present? and f[2].present?)? (f[2].to_d/@stimulreaction_fd.rows.count*100).round : f[2]  %></td>
-        <td><%=(params[:normalization].present? and f[3].present?)? (f[3].to_d/@stimulreaction_fd.rows.count*100).round : f[3]  %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<% end %>
