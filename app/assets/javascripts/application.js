@@ -142,7 +142,7 @@ $(function() {
   $(".combobox").combobox();
 });
 
-*/
+
 
 $.widget("ui.combobox", {
     _create: function() {
@@ -203,3 +203,4 @@ $(document).ready(function() {
         source: $("[id*='_stimul_name']").data('autocompete-source')
     });
 });
+*/

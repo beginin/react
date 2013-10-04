@@ -15,9 +15,9 @@ jQuery ->
     source: $('#worksheet_city_name').data('autocompete-source')
     delay: 100
 
- # $("[id*='_stimul_name']").autocomplete
- #   source: $("[id*='_stimul_name']").data('autocompete-source')
- #   delay: 100
+  $("[id*='_stimul_name']").autocomplete
+    source: $("[id*='_stimul_name']").data('autocompete-source')
+    delay: 100
 
   $("[id*='_reaction_name']").autocomplete
     source: $("[id*='_reaction_name']").data('autocompete-source')
