@@ -1,0 +1,59 @@
+<% if params[:sex] == "diff" %>
+ <div id="reaction">
+  	<h3>Статистика по запросу:</h3>
+    всего стимулов на реакцию "<%= @reaction.reaction %>" : <%= @reaction.stimul_all_count %>
+	<br>	
+  </div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Стимул</th>
+      <th>Частота</th>
+      <th>М</th>
+      <th>Ж</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reaction.stimul_all.each do |f| %>
+      <tr>
+        <td><%= f.stimul.stimul rescue nil %></td>
+        <% @reaction.sex="all" %>
+        <td><%= @reaction.stimul_count(f.stimul_id) %></td>
+        <% @reaction.sex="man" %>
+        <td><%= @reaction.stimul_count(f.stimul_id) %></td>
+        <% @reaction.sex="woman" %>
+        <td><%= @reaction.stimul_count(f.stimul_id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% else %>
+
+ <div id="reaction">
+    <h3>Статистика по запросу:</h3>
+    всего реакций на стимул "<%= @reaction.reaction %>" : <%= @reaction.stimul_all_count %>
+  <br>  
+  </div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Стимул</th>
+      <th>Частота</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reaction.stimul_all.each do |f| %>
+      <tr>
+        <td><%= f.stimul.stimul rescue nil %></td>
+        <td><%= @reaction.stimul_count(f.stimul_id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>

@@ -1,38 +1,119 @@
 class Reaction < ActiveRecord::Base
-  has_many :stimultreaction
+  has_many :stimulreaction
 
-  def stimuls(agemin,agemax,specialty_id=nil,sort="freq")
-    where = "reaction_id = " + self.id.to_s + " and age >= " + agemin.to_s + " and age <= " + agemax.to_s
-    if specialty_id.present?  
-      where = where + " and specialty_id = " + specialty_id.to_s
+  @@agemin = 10
+  @@agemax = 90
+  @@specialty_id=nil
+  @@sex=nil
+  @@normalization=nil
+  @@sort=nil
+
+  def agemin
+    @@agemin
+  end
+
+  def agemin=(some_hash)
+    @@agemin = some_hash
+  end
+
+  def agemax
+    @@agemax
+  end
+
+  def agemax=(some_hash)
+    @@agemax = some_hash
+  end
+
+  def specialty_id
+    @@agemin
+  end
+
+  def specialty_id=(some_hash)
+    @@specialty_id = some_hash
+  end
+
+  def sex
+    @@sex
+  end
+
+  def sex=(some_hash)
+    @@sex = some_hash
+  end
+
+  def normalization
+    @@normalization
+  end
+
+  def normalization=(some_hash)
+    @@normalization = some_hash
+  end
+
+  def sort
+    @@sort
+  end
+
+  def sort=(some_hash)
+    @@sort = some_hash
+  end
+
+  def stimul_all_count
+    d = self.stimulreaction.joins(:worksheet,:stimul).where("age >= ? AND age <= ?", @@agemin, @@agemax)
+    if @@specialty_id.nil? == false
+      d = d.where("specialty_id = ?", @@specialty_id)
     end
-    if sort == "freq"
-      sorts =  "full_man.count DESC"
-    else
-      sorts =  "full_man.stimuls ASC"
+    if @@sex == "man"
+      d = d.where("sex = true", @@sex)
     end
-    sql = "with man as (
-      select stimulreactions.stimul_id, worksheets.sex  ,count(*) from stimulreactions 
-       join worksheets  on (stimulreactions.worksheet_id = worksheets.id)
-      where " + where +"  and worksheets.sex = true
-      GROUP BY stimulreactions.stimul_id, worksheets.sex ),
-      woman as ( 
-      select stimulreactions.stimul_id, worksheets.sex  ,count(*) from stimulreactions 
-       join worksheets  on (stimulreactions.worksheet_id = worksheets.id)
-      where " + where +" and worksheets.sex = false
-      GROUP BY stimulreactions.stimul_id, worksheets.sex 
-      ), 
-      full_man as(
-      select stimulreactions.stimul_id, count(*), stimuls.stimul  from stimulreactions 
-      LEFT OUTER JOIN worksheets  on (stimulreactions.worksheet_id = worksheets.id)
-      LEFT OUTER JOIN stimuls  on (stimulreactions.stimul_id = stimuls.id)
-      where " + where +" 
-      GROUP BY stimulreactions.stimul_id, stimuls.stimul
-      )
-      Select full_man.stimuls_id, full_man.count,woman.count as woman,man.count as man, full_man.stimuls  from full_man
-      LEFT OUTER JOIN  woman  on(full_man.reaction_id = woman.reaction_id)
-      LEFT OUTER JOIN  man on(full_man.reaction_id = man.reaction_id)
-      ORDER BY " + sorts
-    records_array = ActiveRecord::Base.connection.select_all( sql )
+    if @@sex == "woman"
+      d = d.where("sex = false", @@sex)
+    end
+    
+    if @@sort == "freq"
+      d = d.order("count_all DESC")
+    else 
+      d = d.order("stimul ASC")
+    end
+    d.count
+    
+  end
+
+  def stimul_all
+    d = self.stimulreaction.joins(:worksheet,:stimul).where("age >= ? AND age <= ?", @@agemin, @@agemax)
+    if @@specialty_id.nil? == false
+      d = d.where("specialty_id = ?", @@specialty_id)
+    end
+    if @@sex == "man"
+      d = d.where("sex = true", @@sex)
+    end
+    if @@sex == "woman"
+      d = d.where("sex = false", @@sex)
+    end
+    
+    d=d.select("stimul_id, stimul, count(*) as count_all").group("stimul_id,stimul")
+    
+    if @@sort == "freq"
+      d = d.order("count_all DESC")
+    else 
+      d = d.order("stimul ASC")
+    end
+    d
+  end
+
+  def stimul_count(stimul_id)
+    d = self.stimulreaction.where("stimul_id = ?", stimul_id).joins(:worksheet).where("age >= ? AND age <= ?", @@agemin, @@agemax)
+    if @@specialty_id.nil? == false
+      d = d.where("specialty_id = ?", @@specialty_id)
+    end
+    if @@sex == "man"
+      d = d.where("sex = true", @@sex)
+    end
+    if @@sex == "woman"
+      d = d.where("sex = false", @@sex)
+    end
+    d = d.count
+    if normalization.nil? == false
+      d=(100*d/self.stimul_all_count).round rescue nil
+    end
+    d    
   end
 end

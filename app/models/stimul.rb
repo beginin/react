@@ -77,6 +77,26 @@ class Stimul < ActiveRecord::Base
     end
   end
 
+  def reaction_all_count
+    d = self.stimulreaction.joins(:worksheet,:reaction).where("age >= ? AND age <= ?", @@agemin, @@agemax)
+    if @@specialty_id.nil? == false
+      d = d.where("specialty_id = ?", @@specialty_id)
+    end
+    if @@sex == "man"
+      d = d.where("sex = true", @@sex)
+    end
+    if @@sex == "woman"
+      d = d.where("sex = false", @@sex)
+    end  
+    if @@sort == "freq"
+      d = d.order("count_all DESC")
+    else 
+      d = d.order("reaction ASC")
+    end
+    d.count
+
+  end
+
   def reaction_all
     d = self.stimulreaction.joins(:worksheet,:reaction).where("age >= ? AND age <= ?", @@agemin, @@agemax)
     if @@specialty_id.nil? == false
@@ -112,7 +132,7 @@ class Stimul < ActiveRecord::Base
     end
     d = d.count
     if normalization.nil? == false
-      d=(100*d/self.reaction_all.count.count).round rescue nil
+      d=(100*d/self.reaction_all_count).round rescue nil
     end
     d    
   end

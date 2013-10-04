@@ -52,8 +52,6 @@
 <% end %>
 
 <% if @reaction.present? %>
-  <div id="reaction">
-  	<%= @reaction.reaction %>
-  </div>
+ 	<%= render 'pages/reaction' %>
 <% end %>
 

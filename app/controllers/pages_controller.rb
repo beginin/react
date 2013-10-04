@@ -23,10 +23,19 @@ class PagesController < ApplicationController
         
         #@stimulreaction_fd = @stimul.reactions(params[:age_start], params[:age_end],specialty,(params[:sort]))
 	  	end
-	  else
-	  	if params[:query].present?
-	  		@reaction = Reaction.find(params[:query])
-	  	end
+	  elsif params[:stimulreaction] == "reaction"
+      if params[:query].present? and Reaction.find_by_reaction(params[:query])
+        @reaction = Reaction.find_by_reaction(params[:query])
+        @reaction.agemin=params[:age_start]
+        @reaction.agemax=params[:age_end]
+        @reaction.specialty_id=Specialty.find(params[:specialty]).id rescue nil
+        @reaction.sex=params[:sex]
+        @reaction.sort=params[:sort] 
+        @reaction.normalization=nil
+        @reaction.normalization=params[:normalization] if params[:normalization].present?
+        
+        #@stimulreaction_fd = @stimul.reactions(params[:age_start], params[:age_end],specialty,(params[:sort]))
+      end
 	  end
   end
 
