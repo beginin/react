@@ -13,6 +13,12 @@ class StimulsController < ApplicationController
     render json: @stimuls.map(&:stimul_withid)
   end
 
+  def searchwithoutnumber
+    d= Integer(search_params['term']) rescue nil
+    @stimuls = Stimul.order(:stimul).where("cast(id as text) like ? or stimul like ? ", '%' + search_params['term'] + '%', '%' + search_params['term'] + '%' )
+    render json: @stimuls.map(&:stimul)
+  end
+
   # GET /stimuls/1
   # GET /stimuls/1.json
   def show

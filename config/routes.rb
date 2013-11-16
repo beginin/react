@@ -16,6 +16,7 @@ React::Application.routes.draw do
 
   resources :stimuls do
     get 'search' => 'stimuls#search', :on => :collection
+    get 'searchwithoutnumber' => 'stimuls#searchwithoutnumber', :on => :collection
     get 'upload' => 'stimuls#upload', :on => :collection
     post 'upload' => 'stimuls#uploadcsv', :on => :collection
   end

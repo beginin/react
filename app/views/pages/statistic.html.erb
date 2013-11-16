@@ -2,7 +2,7 @@
 <%= form_tag '', :method => :post do %>
   <div class="field">
   	<%= label_tag :query, "Запрос" %>
-    <%= text_field_tag :query, params[:query] %>
+    <%= text_field_tag :query, params[:query] ,data: {autocompete_source: searchwithoutnumber_stimuls_path} %>
   </div>
   <div class="field">
     <%= radio_button_tag(:stimulreaction, "stimul", (params[:stimulreaction] ||= "stimul" ) == "stimul") %>
