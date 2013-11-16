@@ -112,7 +112,7 @@ class Reaction < ActiveRecord::Base
     end
     d = d.count
     if normalization.nil? == false
-      d=(100*d/self.stimul_all_count).round(2) rescue nil
+      d=(100*d/self.stimul_all_count.to_f).round(2) rescue nil
     end
     d    
   end
