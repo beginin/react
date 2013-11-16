@@ -4,7 +4,10 @@ class WorksheetsController < ApplicationController
   # GET /worksheets
   # GET /worksheets.json
   def index
-    @worksheets = Worksheet.all
+    respond_to do |format|
+      format.html {  }
+      format.json { render json: WorksheetsDatatable.new(view_context) }
+    end
   end
 
   # GET /worksheets/1

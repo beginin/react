@@ -3,6 +3,20 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
+  $('#worksheets').dataTable
+    oLanguage:
+      sUrl: "/DataTable.russian.txt"
+    bPaginate: false
+    bLengthChange: false
+    bFilter: false
+    bSort: false
+    bInfo: false
+    bAutoWidth: false
+    bProcessing: true
+    bServerSide: true
+    sAjaxSource: $('#worksheets').data('source')
+
+jQuery ->
   $('#worksheet_language_name').autocomplete
     source: $('#worksheet_language_name').data('autocompete-source')
     delay: 100

@@ -18,6 +18,7 @@
 //= require jquery.ui.autocomplete
 //= require jquery.ui.button
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
 //= require_tree .
 
 

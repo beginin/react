@@ -56,3 +56,10 @@ gem 'charlock_holmes'
 gem 'fastercsv'
 gem 'spreadsheet'
 gem 'unicorn'
+
+
+
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'jquery-ui-rails'
+
+gem 'will_paginate'

@@ -1,7 +1,7 @@
 <h1>Анкеты</h1>
 <%= link_to 'Загрузить', upload_worksheets_path %>
 
-<table>
+<table id="worksheets" class="display" data-source="<%= worksheets_url(format: "json") %>">
   <thead>
     <tr>
       <th>Номер</th>
@@ -13,25 +13,11 @@
       <th>Город</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @worksheets.each do |worksheet| %>
-      <tr>
-        <td><%= worksheet.number %></td>
-        <td><%= worksheet.sex_name %></td>
-        <td><%= worksheet.age %></td>
-        <td><%= worksheet.language_name %></td>
-        <td><%= worksheet.specialty_name %></td>
-        <td><%= worksheet.dateinput %></td>
-        <td><%= worksheet.city_name %></td>
-        <td><%= link_to 'Показать', worksheet %></td>
-        <td><%= link_to 'Редактировать', edit_worksheet_path(worksheet) %></td>
-        <td><%= link_to 'Удалить', worksheet, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
-      </tr>
-    <% end %>
+
   </tbody>
 </table>
 
