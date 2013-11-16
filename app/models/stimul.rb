@@ -132,7 +132,7 @@ class Stimul < ActiveRecord::Base
     end
     d = d.count
     if normalization.nil? == false
-      d=(100*d/self.reaction_all_count).round rescue nil
+      d=(100*d/self.reaction_all_count).round(2) rescue nil
     end
     d    
   end
