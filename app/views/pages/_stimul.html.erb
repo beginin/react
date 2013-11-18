@@ -28,16 +28,17 @@
         <% end %>    
       </tr>
     <% end %>
-      <% fd = @stimul.reaction_count(Reaction.find_by_reaction("отказ").id) rescue nil
-      f = Reaction.find_by_reaction("отказ")
+      <% fd = @stimul.reaction_count(Reaction.find_by_reaction("нет реакции").id) rescue nil
+      f = Reaction.find_by_reaction("нет реакции")
       if fd > 0  and fd.nil? ==false %>
       <tr>
-        <td><%= f.reaction rescue nil %></td>
-        <td><%= @stimul.reaction_count(f.id) %></td>
+        <td><b><%= f.reaction rescue nil %></b></td>
+        <% @stimul.sex="all" %>
+        <td><b><%= @stimul.reaction_count(f.id) %></b></td>
         <% @stimul.sex="man" %>
-        <td><%= @stimul.reaction_count(f.id) %></td>
+        <td><b><%= @stimul.reaction_count(f.id) %></b></td>
         <% @stimul.sex="woman" %>
-        <td><%= @stimul.reaction_count(f.id) %></td>
+        <td><b><%= @stimul.reaction_count(f.id) %></b></td>
       </tr>
       <% end %>
   </tbody>
@@ -62,17 +63,17 @@
   <tbody>
     <% @stimul.reaction_all.each do |f| %>
       <tr>
-        <% if f.reaction.reaction != "отказ" %>
+        <% if f.reaction.reaction != "нет реакции" %>
         <td><%= f.reaction.reaction rescue nil %></td>
         <td><%= @stimul.reaction_count(f.reaction_id) %></td>
         <% end %> 
       </tr>
     <% end %>
-      <% fd = @stimul.reaction_count(Reaction.find_by_reaction("отказ").id) rescue nil
-      f = Reaction.find_by_reaction("отказ")
+      <% fd = @stimul.reaction_count(Reaction.find_by_reaction("нет реакции").id) rescue nil
+      f = Reaction.find_by_reaction("нет реакции")
       if fd > 0  and fd.nil? ==false %>
       <tr>
-        <td><%= f.reaction  %></td>
+        <td><b><%= f.reaction  %></b></td>
         <td><%= @stimul.reaction_count(f.id) %></td>
       </tr>
       <% end %>
