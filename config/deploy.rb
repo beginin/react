@@ -13,19 +13,19 @@ set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
 set :rvm_ruby_string, :local
 load 'deploy/assets'
 
-set :scm, :git # Используем git. Можно, конечно, использовать что-нибудь другое - svn, например, но общая рекомендация для всех кто не использует git - используйте git. 
-set :repository,  "git@github.com:beginin/react.git" # Путь до вашего репозитария. Кстати, забор кода с него происходит уже не от вас, а от сервера, поэтому стоит создать пару rsa ключей на сервере и добавить их в deployment keys в настройках репозитария.
-set :branch, "master" # Ветка из которой будем тянуть код для деплоя.
-set :deploy_via, :remote_cache # Указание на то, что стоит хранить кеш репозитария локально и с каждым деплоем лишь подтягивать произведенные изменения. Очень актуально для больших и тяжелых репозитариев.
+set :scm, :git  
+set :repository,  "git@github.com:beginin/react.git" 
+set :branch, "master" 
+set :deploy_via, :remote_cache #.
 
 role :web, domain
 role :app, domain
 role :db,  domain, :primary => true
 
-before 'deploy:setup', 'rvm:install_rvm', 'rvm:install_ruby' # интеграция rvm с capistrano настолько хороша, что при выполнении cap deploy:setup установит себя и указанный в rvm_ruby_string руби.
+before 'deploy:setup', 'rvm:install_rvm', 'rvm:install_ruby' # 
 
 after 'deploy:update_code', :roles => :app do
-  # Здесь для примера вставлен только один конфиг с приватными данными - database.yml. Обычно для таких вещей создают папку /srv/myapp/shared/config и кладут файлы туда. При каждом деплое создаются ссылки на них в нужные места приложения.
+  # .
   #run "rm -f #{current_release}/config/database.yml"
   #run "ln -s #{deploy_to}/shared/config/database.yml #{current_release}/config/database.yml"
 end
