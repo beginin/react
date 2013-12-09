@@ -62,7 +62,7 @@ class Worksheet < ActiveRecord::Base
     upload['xls'].each do |xls|
       name = xls.original_filename
       logger.debug "Hello #{name.scan(/\d+/)}"
-      directory = "tmp/upload"
+      directory = "tmp"
       path = File.join(directory, name)
       File.open(path, "wb") { |f| f.write(xls.read) }
       book = Spreadsheet.open (path)
