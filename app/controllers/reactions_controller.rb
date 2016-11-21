@@ -8,7 +8,7 @@ class ReactionsController < ApplicationController
   end
 
   def dic
-    @reactions = Reaction.all
+    @reactions = Reaction.all.sort
   end
 
   def search
