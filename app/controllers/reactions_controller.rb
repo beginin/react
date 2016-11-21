@@ -7,6 +7,10 @@ class ReactionsController < ApplicationController
     @reactions = Reaction.all
   end
 
+  def dic
+    @reactions = Reaction.all
+  end
+
   def search
     @reactions = Reaction.order(:reaction).where("reaction like ?", '%' + search_params['term'] + '%' )
     render json: @reactions.map(&:reaction)

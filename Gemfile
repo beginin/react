@@ -56,7 +56,7 @@ gem 'charlock_holmes'
 gem 'fastercsv'
 gem 'spreadsheet'
 gem 'unicorn'
-
+gem 'unicode_utils'
 
 
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'

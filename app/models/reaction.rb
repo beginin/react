@@ -116,4 +116,15 @@ class Reaction < ActiveRecord::Base
     end
     d    
   end
+
+  def dictionary
+    m = Hash.new
+    stimul_all.each do |stimul|
+	indexd = self.stimul_count(stimul.stimul_id) rescue nil
+	m[indexd] = Array.new if m[indexd].nil?
+	m[indexd] << stimul.stimul.stimul rescue nil
+    end
+    m= m.sort { |x,y| y <=> x }
+    m
+  end
 end

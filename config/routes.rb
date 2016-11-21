@@ -12,6 +12,7 @@ React::Application.routes.draw do
 
   resources :reactions do
     get 'search' => 'reactions#search', :on => :collection
+    get 'dic' => 'reactions#dic', :on => :collection
   end
 
   resources :stimuls do

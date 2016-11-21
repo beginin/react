@@ -1,0 +1,31 @@
+<h1>Реакции</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reactions.each do |reaction| %>
+      <tr>
+        <td><b><%= UnicodeUtils.upcase(reaction.reaction) %></b> ← 
+        
+	<% reaction.dictionary.each do |stimul| %>
+	    <% stimul.last.each do |st| %>
+		
+		<%st=st+"," if st!=stimul.last.last %>
+		<%=st%> 
+	    <% end %>
+	    <b><%= stimul.first.to_s %></b>;
+	<% end %>
+	<b><i><%=reaction.stimulreaction.group(:stimul_id).count.count %></b></i> + <b><i><%= reaction.stimul_all_count %></b></i>
+	</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
